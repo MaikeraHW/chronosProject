@@ -1,0 +1,29 @@
+.header{
+    padding: 5rem 0 0;
+    color: var(--primary)
+}
+
+.headerContent{
+    width: fit-content;
+    margin: auto;
+    transition: 0.2s ease-in-out
+}
+
+.icon{
+    text-align: center;
+}
+
+.timerIcon{
+    width: 6.5rem;
+    height: auto;
+}
+
+.title{
+    text-align: center;
+    font-size: 4.5rem;
+}
+
+.headerContent:hover{
+    color: var(--primary-dark);
+    cursor: pointer;
+}

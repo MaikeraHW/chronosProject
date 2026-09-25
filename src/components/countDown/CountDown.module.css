@@ -1,0 +1,7 @@
+.clock{
+    font-size: clamp(10rem, 25dvw, 16rem);
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}

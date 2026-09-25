@@ -1,0 +1,32 @@
+.inputHolder{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
+}
+
+.inputField{
+    width: 60%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 1.4rem;
+    border: 2px solid transparent;
+    border-bottom: 2px solid var(--primary);
+    transition: 0.1s;
+    color: var(--text-over-primary-dark);
+    text-align: center;
+    font-size: 1.4rem;
+
+}
+
+.inputField::placeholder{
+    text-align: center;
+}
+
+.inputField:focus{
+    border-radius: 0.8rem;
+    border: 2px solid var(--primary);
+}
+

@@ -1,0 +1,45 @@
+.buttonHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem auto;
+}
+
+.playButton{
+    width: 60%;
+    height: 5rem;
+    border-radius: 0.8rem;
+    border: none;
+    outline: none;
+    background-color: var(--primary);
+}
+
+.stopButton{
+    width: 60%;
+    height: 5rem;
+    border-radius: 0.8rem;
+    border: none;
+    outline: none;
+    background-color: var(--error);
+}
+
+.stopButton:hover{
+    background-color: #681111;
+    cursor: pointer;
+}
+
+.playButton:hover{
+    background-color: var(--primary-dark);
+    cursor: pointer;
+}
+
+.playIcon{
+    width: 3.4rem;
+    height: auto;
+}
+
+.stopIcon{
+    color: var(--text-over-primary-dark);
+    width: 3.4rem;
+    height: auto;
+}
