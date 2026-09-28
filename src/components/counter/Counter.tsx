@@ -1,11 +1,14 @@
 
+import { useTaskContext } from '../../contexts/TaskContext/TaskContext'
 import styles from './Counter.module.css'
 
-type CounterProps = {
-    ciclo: number
-}
 
-export default function Counter({ciclo}:CounterProps){
+export default function Counter(){
+
+    const { state } = useTaskContext()
+
+    const ciclo = state.currentCycle
+    
 
     return (
         <div className={styles.counterHolder}>

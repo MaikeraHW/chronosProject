@@ -1,17 +1,33 @@
 import { CirclePlayIcon, CircleStopIcon } from 'lucide-react'
 import styles from './PlayButton.module.css'
+import { useTaskContext } from '../../../contexts/TaskContext/TaskContext'
 
-type PlayButtonProps = {
-    onclick: () => void
-    value: boolean
-}
 
-export default function PlayButton({onclick, value}:PlayButtonProps){
+
+export default function PlayButton(){
+
+    const { state, setState } = useTaskContext()
+
+    const estado = state.currentCycle
+    const tipo = estado % 2 === 0
+
+    function playButton() {
+
+        setState(prevState => {
+
+        return {
+        ...prevState,
+        currentCycle: prevState.currentCycle === 8 ? 1 : prevState.currentCycle + 1
+        }
+        
+    })
+    }
+    
 
     return (
         <div className={styles.buttonHolder}>
-            <button className={ (value) ? styles.stopButton : styles.playButton} onClick={() => onclick()}>
-                { (value) ? <CircleStopIcon className={styles.stopIcon}/>  : <CirclePlayIcon className={styles.playIcon}/>}
+            <button className={ (tipo) ? styles.playButton : styles.stopButton } onClick={playButton}>
+                { (tipo) ? <CirclePlayIcon className={styles.playIcon}/> : <CircleStopIcon className={styles.stopIcon}/>}
             </button>
         </div>
     )
