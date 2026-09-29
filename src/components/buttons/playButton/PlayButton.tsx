@@ -2,8 +2,6 @@ import { CirclePlayIcon, CircleStopIcon } from 'lucide-react'
 import styles from './PlayButton.module.css'
 import { useTaskContext } from '../../../contexts/TaskContext/TaskContext'
 
-
-
 export default function PlayButton(){
 
     const { state, setState } = useTaskContext()
@@ -17,9 +15,10 @@ export default function PlayButton(){
 
         return {
         ...prevState,
-        currentCycle: prevState.currentCycle === 8 ? 1 : prevState.currentCycle + 1
-        }
+        currentCycle: prevState.currentCycle === 8 ? 1 : prevState.currentCycle + 1,
         
+        }
+
     })
     }
     
