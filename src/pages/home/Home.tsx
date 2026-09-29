@@ -22,7 +22,7 @@ export default function Home(){
 
                 <Counter />
 
-                <PlayButton />
+                <PlayButton task={task}/>
             </div>
 
         </section>
