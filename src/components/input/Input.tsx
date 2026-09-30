@@ -13,10 +13,6 @@ type InputProps = {
 
 export default function Input({label, type, placeHolder, id, task, setTask, disabled }:InputProps){
 
-    
-
-    
-
     return (
         <div className={styles.inputHolder}>
             <label htmlFor={id} className={styles.inputLabel}> {label} </label>
