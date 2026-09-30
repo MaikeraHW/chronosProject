@@ -8,6 +8,7 @@ import { useState } from 'react'
 export default function Home(){
 
     const [task, setTask] = useState('')
+    const [inputStatus, setInputStatus] = useState(false)
 
     return (
         <section className={styles.homeSection}>
@@ -16,13 +17,13 @@ export default function Home(){
 
             <div className={styles.homeContent}>
 
-                <Input label='Task' placeHolder='Ex: Estudar para o teste de React' type='text' id='TaskInput' task={task} setTask={setTask}/>
+                <Input label='Task' placeHolder='Ex: Estudar para o teste de React' type='text' id='TaskInput' task={task} setTask={setTask} disabled={inputStatus}/>
 
                 <p className={styles.messenger}> Nesse ciclo foque por 25 min.</p>
 
                 <Counter />
 
-                <PlayButton task={task}/>
+                <PlayButton task={task} setInputStatus={setInputStatus} />
             </div>
 
         </section>

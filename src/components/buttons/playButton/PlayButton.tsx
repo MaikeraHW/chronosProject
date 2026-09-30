@@ -2,19 +2,34 @@ import { CirclePlayIcon, CircleStopIcon } from 'lucide-react'
 import styles from './PlayButton.module.css'
 import { useTaskContext } from '../../../contexts/TaskContext/TaskContext'
 import type { TaskModel } from '../../../models/TaskModel'
+import { getNextTypeCycle } from '../../../utils/getNextTypeCycle'
+import { getNextCycle } from '../../../utils/getNextCycle'
+import { formattedTime } from '../../../utils/formattedTime'
 
 type PlayButtonProps = {
     task: string
+    setInputStatus: (value: boolean) => void,
 }
 
-export default function PlayButton({task}:PlayButtonProps){
+export default function PlayButton({task, setInputStatus }:PlayButtonProps){
 
     const { state, setState } = useTaskContext()
 
-    const estado = state.currentCycle
-    const tipo = estado % 2 === 0
+
+    const nextCycle = getNextCycle(state.currentCycle)
+    const cycleType = getNextTypeCycle(nextCycle)
 
     function playButton() {
+
+
+        if (nextCycle > 0 && nextCycle < 8){
+
+            setInputStatus(true)
+        } else {
+
+            setInputStatus(false)
+
+        }
 
         const taskName = task.trim()
 
@@ -33,11 +48,11 @@ export default function PlayButton({task}:PlayButtonProps){
         const newTask: TaskModel = {
             id: Date.now().toString(),
             name: taskName,
-            duration: 1,
+            duration: state.config[cycleType],
             startDate: Date.now(),
             completeDate: null,
             interruptDate: null,
-            type: "workTime"
+            type: cycleType
         }
 
         const secondsRemaining = newTask.duration * 60
@@ -48,9 +63,9 @@ export default function PlayButton({task}:PlayButtonProps){
         ...prevState,
         tasks: [...prevState.tasks, newTask],
         secondsRemaining: secondsRemaining, //conferir
-        formattedSecondsRemaining: '00:00', //conferir
+        formattedSecondsRemaining: formattedTime(secondsRemaining), //conferir
         activeTask: newTask,
-        currentCycle: 1 //conferir
+        currentCycle: prevState.currentCycle === 8 ? 1 : prevState.currentCycle + 1
         }
 
     })
@@ -59,8 +74,8 @@ export default function PlayButton({task}:PlayButtonProps){
 
     return (
         <div className={styles.buttonHolder}>
-            <button className={ (tipo) ? styles.playButton : styles.stopButton } onClick={playButton}>
-                { (tipo) ? <CirclePlayIcon className={styles.playIcon}/> : <CircleStopIcon className={styles.stopIcon}/>}
+            <button className={ (state.activeTask?.type === 'workTime') ? styles.stopButton : styles.playButton } onClick={playButton}>
+                { (state.activeTask?.type === 'workTime') ? <CircleStopIcon className={styles.stopIcon}/> : <CirclePlayIcon className={styles.playIcon}/>}
             </button>
         </div>
     )
