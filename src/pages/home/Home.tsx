@@ -15,11 +15,10 @@ import CountDown from '../../components/countDown/CountDown'
 
 export default function Home(){
 
-    const [task, setTask] = useState('')
-    const [inputStatus, setInputStatus] = useState(false)
-
     const { state, setState } = useTaskContext()
 
+    const [task, setTask] = useState('')
+    const [inputStatus, setInputStatus] = useState(false)
 
     const nextCycle = getNextCycle(state.currentCycle)
     const cycleType = getNextTypeCycle(nextCycle)
@@ -77,12 +76,30 @@ export default function Home(){
 
     function stopButton(){
 
-        console.log('teeeeeeeeste de botão que pausa')
-        setInputStatus(false)
+        setState( prevState => {
+            return {
+                ...prevState,
+                activeTask: null,
+                secondsRemaining: 0,
+                formattedSecondsRemaining: '00:00',
+                tasks: prevState.tasks.map( task => { 
+
+                    if (prevState.activeTask && prevState.activeTask.id === task.id) {
+                        return {
+                        ...task, 
+                        interruptDate: Date.now()}
+                    }
+                    
+                    return task
+
+                })
+
+            }
+        })
 
     }
 
-    
+
     return (
         <section className={styles.homeSection}>
             
